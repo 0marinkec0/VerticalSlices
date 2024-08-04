@@ -24,7 +24,7 @@ public class UpvotePostCommandHandler : IRequestHandler<UpvotePostCommand, Resul
 
     public async Task<Result> Handle(UpvotePostCommand request, CancellationToken cancellationToken)
     {
-        var post = await _appDbContext.Posts.FirstOrDefaultAsync(a => a.Id == request.postId);
+        var post = await _appDbContext.Posts.Include(v => v.Votes).FirstOrDefaultAsync(a => a.Id == request.postId);
 
         if(post == null)
         {
@@ -33,11 +33,9 @@ public class UpvotePostCommandHandler : IRequestHandler<UpvotePostCommand, Resul
 
         var user = await _identityService.GetUserByIdAsync(_currentUserService.UserId);
 
-        var vote = await _appDbContext.Votes.Where(a => a.PostId == request.postId).FirstOrDefaultAsync(a => a.UserId == _currentUserService.UserId);
+        var upvoteResult = post.Upvote(user.Value, request.postId);
 
-        var upvoteResult = post.Upvote(user.Value, vote);
-
-        if (upvoteResult.IsSuccess && vote is null)
+        if (upvoteResult.IsSuccess)
         {
             _appDbContext.Posts.Update(post);
 
@@ -45,16 +43,6 @@ public class UpvotePostCommandHandler : IRequestHandler<UpvotePostCommand, Resul
 
             return Result.Success();
         }
-
-        if (upvoteResult.IsSuccess && vote is not null)
-        {
-            _appDbContext.Votes.Remove(vote);
-
-            await _unitOfWork.SaveChangesAsync();
-
-            return Result.Success();
-        }
-
         return upvoteResult;
     }
 }

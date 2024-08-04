@@ -25,7 +25,9 @@ public class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, List<Po
             Upvotes = n.Upvotes,
             Downvotes = n.Downvotes,
             CalculateVotes = n.CalculateVotes
-        }).ToListAsync();
+        })
+        .OrderBy(o => o.CalculateVotes)
+        .ToListAsync();
 
         return postList;
     }

@@ -23,7 +23,7 @@ public class DownvotePostCommandHandler : IRequestHandler<DownvotePostCommand, R
 
     public async Task<Result> Handle(DownvotePostCommand request, CancellationToken cancellationToken)
     {
-        var post = await _appDbContext.Posts.FirstOrDefaultAsync(a => a.Id == request.postId);
+        var post = await _appDbContext.Posts.Include(x => x.Votes).FirstOrDefaultAsync(a => a.Id == request.postId);
 
         if (post == null)
         {
@@ -32,22 +32,11 @@ public class DownvotePostCommandHandler : IRequestHandler<DownvotePostCommand, R
 
         var user = await _identityService.GetUserByIdAsync(_currentUserService.UserId);
 
-        var vote = await _appDbContext.Votes.Where(a => a.PostId == request.postId).FirstOrDefaultAsync(a => a.UserId == _currentUserService.UserId);
+        var downvoteResult = post.Downvote(user.Value, request.postId);
 
-        var downvoteResult = post.Downvote(user.Value, vote);
-
-        if (downvoteResult.IsSuccess && vote is null)
+        if (downvoteResult.IsSuccess)
         {
             _appDbContext.Posts.Update(post);
-
-            await _unitOfWork.SaveChangesAsync();
-
-            return Result.Success();
-        }
-
-        if (downvoteResult.IsSuccess && vote is not null)
-        {                  
-            _appDbContext.Votes.Remove(vote);
 
             await _unitOfWork.SaveChangesAsync();
 

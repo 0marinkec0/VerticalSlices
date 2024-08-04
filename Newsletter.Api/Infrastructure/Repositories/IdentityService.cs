@@ -117,4 +117,16 @@ public class IdentityService : IIdentityService
 
         return Result<string>.Success(token);
     }
+
+    public async Task<Result<User>> GetUserByIdAsync(int id)
+    {
+        var user = await _userManager.FindByIdAsync(id.ToString());
+
+        if (user == null)
+        {
+            return Result<User>.Failure(new Error(code: "IdentityError.UserNotFound", message: $"User with id {id} was not found"));
+        }
+
+        return Result<User>.Success(user);
+    }
 }

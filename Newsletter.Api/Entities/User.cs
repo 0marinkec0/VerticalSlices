@@ -5,6 +5,10 @@ namespace Newsletter.Api.Entities;
 
 public class User : IdentityUser<int>
 {
+    public List<Post> Posts { get; set; }
+
+    public List<Vote> Votes { get; set; }
+
     private User() { }
 
     public static User CreateUser(string userName, string email)

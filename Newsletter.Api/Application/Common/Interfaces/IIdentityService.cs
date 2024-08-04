@@ -1,4 +1,5 @@
-﻿using Newsletter.Api.Shared;
+﻿using Newsletter.Api.Entities;
+using Newsletter.Api.Shared;
 
 namespace Newsletter.Api.Application.Common.Interfaces;
 
@@ -8,4 +9,6 @@ public interface IIdentityService
     Task<Result<string>> Login(string email, string password);
     Task<Result<string>> GetEmailConfirmationTokenAsync(string email);
     Task<Result> ConfirmEmail(string email, string token);
+
+    Task<Result<User>> GetUserByIdAsync(int id);
 }

@@ -12,6 +12,9 @@ namespace Newsletter.Api.Infrastructure.Database.Persistent
         {
         }
 
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Vote> Votes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

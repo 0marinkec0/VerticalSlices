@@ -2,6 +2,12 @@
 
 This is .NET Web API solution with Vertical Slices Architecture design which includes authentication features using .NET Identity Framework.
 
+
+![image](https://github.com/user-attachments/assets/b1e038ea-f495-4b74-99db-8ba434ecf11e) ![image](https://github.com/user-attachments/assets/a5d64217-78a2-4bd0-a55a-ff277aea2f60)
+
+
+
+
 Solution is by architecture design divided into:
 
 - **Application Layer:**

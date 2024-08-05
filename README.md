@@ -28,7 +28,7 @@ To start and use the project, few things need to be changed and updated.
 
 Add first migration to the project by opening package manager console and running.
  
-    add-migration "{NameOfFirstMigration}" -OutputDir Infrastructure\Database\Migrations -StartupProject Newsletter.Api -args         "{DatabaseConnectionString}"
+    add-migration "{NameOfFirstMigration}" -OutputDir Infrastructure\Database\Migrations -StartupProject Newsletter.Api -args "{DatabaseConnectionString}"
            
 First migration is needed so database container can pick it up and run migrations are created in "Infrastructure/Migrations" folder.
 

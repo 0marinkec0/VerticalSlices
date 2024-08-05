@@ -26,15 +26,11 @@ Setup before running:
 
 To start and use the project, few things need to be changed and updated.
 
-First, 
-
-    Add first migration to the project by opening package manager console and running 
-    add-migration "{NameOfFirstMigration}" -OutputDir Infrastructure\Migrations -StartupProject Newsletter.Api -args "{DatabaseConnectionString}"
-        First migration is needed so database container can pick it up and run
-        migrations are created in "Infrastructure/Migrations" folder.
+Add first migration to the project by opening package manager console and running.
+ 
+    add-migration "{NameOfFirstMigration}" -OutputDir Infrastructure\Migrations -StartupProject Newsletter.Api -args         "{DatabaseConnectionString}"
            
-
-Now you can run project using docker-compose and it should open swagger page when it starts.
+First migration is needed so database container can pick it up and run migrations are created in "Infrastructure/Migrations" folder.
 
 NOTE: .appsettings.json are using my own setting and variables, feel free to change them by your needs.
       DatabaseConnectionString needs to be changed by your own!

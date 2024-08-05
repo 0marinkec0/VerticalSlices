@@ -5,8 +5,9 @@ This is .NET Web API solution with Vertical Slices Architecture design which inc
 Solution is by architecture design divided into:
 
 - **Application Layer:**
-  -  **Common** folder which uses **Interfaces**, **DTO**'s and **Behaviours**(Validation and Logging)
-  -  **Features** which uses MediatR pattern with CQRS (it is divided into Commands and Queries)
+  -  **Common:** folder uses **Interfaces**, **DTO**'s and **Behaviours**(Validation and Logging) classes
+  -  **Features** implements MediatR pattern with CQRS (it is divided into Commands and Queries)
+      - All features are using following flow: **Validator -> Command -> CommandHandler -> Endpoint**
     
 - **Entities:**
   - Using code first approach entities are used to create tables in SQL database and they contain business logic
@@ -18,3 +19,22 @@ Solution is by architecture design divided into:
     
 - **Shared folder:**
   - Contains Result class pattern with Error class implementation which are used trough layers
+
+
+
+Setup before running:
+
+To start and use the project, few things need to be changed and updated.
+
+First, 
+
+    Add first migration to the project by opening package manager console and running 
+    add-migration "{NameOfFirstMigration}" -OutputDir Infrastructure\Migrations -StartupProject Newsletter.Api -args "{DatabaseConnectionString}"
+        First migration is needed so database container can pick it up and run
+        migrations are created in "Infrastructure/Migrations" folder.
+           
+
+Now you can run project using docker-compose and it should open swagger page when it starts.
+
+NOTE: .appsettings.json are using my own setting and variables, feel free to change them by your needs.
+      DatabaseConnectionString needs to be changed by your own!

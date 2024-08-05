@@ -6,7 +6,7 @@ Solution is by architecture design divided into:
 
 - **Application Layer:**
   -  **Common:** folder uses **Interfaces**, **DTO**'s and **Behaviours**(Validation and Logging) classes
-  -  **Features** implements MediatR pattern with CQRS (it is divided into Commands and Queries)
+  -  **Features:** implements MediatR pattern with CQRS (it is divided into Commands and Queries)
       - All features are using following flow: **Validator -> Command -> CommandHandler -> Endpoint**
     
 - **Entities:**
@@ -14,8 +14,8 @@ Solution is by architecture design divided into:
     regarding each and every entity
     
 - **Infrastructure Layer:**
-  - **Database** used for migrations and contains ApplicationDbContext class
-  - **Repositories** contains all implementation of abstractions in application layer
+  - **Database:** used for migrations and contains ApplicationDbContext class
+  - **Repositories:** contains all implementation of abstractions in application layer
     
 - **Shared folder:**
   - Contains Result class pattern with Error class implementation which are used trough layers
@@ -34,3 +34,14 @@ First migration is needed so database container can pick it up and run migration
 
 NOTE: .appsettings.json are using my own setting and variables, feel free to change them by your needs.
       DatabaseConnectionString needs to be changed by your own!
+
+
+
+# Tehnologies and Patterns
+- [ASP .NET API with .NET 7](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-7.0)
+- [Fluent Validation](https://docs.fluentvalidation.net/en/latest/)
+- [MediatR with CQRS](https://github.com/jbogard/MediatR)
+- [EntityFramework](https://learn.microsoft.com/en-us/ef/core/)
+- [Identity ASP.NET core](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-8.0&tabs=visual-studio)
+- [Vertical Slices Arhitecture](https://github.com/nadirbad/VerticalSliceArchitecture)
+- SQL Server

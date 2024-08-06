@@ -8,6 +8,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateBootstrapLogger();
 
 Log.Information("Starting up application...");
+
 try
 {
     builder.ConfigureServices()

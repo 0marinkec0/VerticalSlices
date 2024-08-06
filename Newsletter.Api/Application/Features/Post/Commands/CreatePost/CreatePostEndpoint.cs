@@ -1,5 +1,6 @@
 ﻿using Carter;
 using MediatR;
+using Newsletter.Api.Shared;
 
 namespace Newsletter.Api.Application.Features.Post.CreatePost;
 

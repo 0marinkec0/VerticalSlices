@@ -8,7 +8,7 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     public AppDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-        optionsBuilder.UseSqlServer("Server=DESKTOP-4UGJ1EH\\SQLEXPRESS;Database=VerticalSlices;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer(args[0]);
         return new AppDbContext(optionsBuilder.Options);
     }
 }
